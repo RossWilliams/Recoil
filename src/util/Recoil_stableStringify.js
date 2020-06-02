@@ -126,11 +126,11 @@ function stringify(x: mixed, opt: Options, key?: string): string {
 // * We could support BigInt, but Flow doesn't seem to like it.
 // See Recoil_stableStringify-test.js for examples
 function stableStringify(x: mixed, opt?: Options): string {
-  const startTime = window && window.performance ? window.performance.now() : 0;
+  const startTime = typeof window !== "undefined" && window.performance ? window.performance.now() : 0;
 
   const str = stringify(x, opt ?? {allowFunctions: undefined});
 
-  const endTime = window && window.performance ? window.performance.now() : 0;
+  const endTime = typeof window !== "undefined" && window.performance ? window.performance.now() : 0;
   if (__DEV__) {
     if (endTime - startTime > TIME_WARNING_THRESHOLD_MS) {
       /* eslint-disable fb-www/no-console */
