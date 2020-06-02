@@ -587,7 +587,7 @@ function Batcher(props) {
   return null;
 }
 
-if ( window) {
+if ( typeof window !== "undefined") {
   if (!window.$recoilDebugStates) {
     window.$recoilDebugStates = [];
   }
@@ -677,7 +677,7 @@ function RecoilRoot({
     } // Save changes to nextTree and schedule a React update:
 
 
-    if ( window) {
+    if ( typeof window !== "undefined") {
       window.$recoilDebugStates.push(replaced); // TODO this shouldn't happen here because it's not batched
     }
 
@@ -2444,11 +2444,11 @@ function stringify(x, opt, key) {
 
 
 function stableStringify(x, opt) {
-  const startTime = window && window.performance ? window.performance.now() : 0;
+  const startTime = typeof window !== "undefined" && window.performance ? window.performance.now() : 0;
   const str = stringify(x, opt !== null && opt !== void 0 ? opt : {
     allowFunctions: undefined
   });
-  const endTime = window && window.performance ? window.performance.now() : 0;
+  const endTime = typeof window !== "undefined" && window.performance ? window.performance.now() : 0;
 
   {
     if (endTime - startTime > TIME_WARNING_THRESHOLD_MS) {
